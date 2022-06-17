@@ -18,8 +18,8 @@ USUARIOS REGISTRADOS:
    ○Explicación
    ○Fichero
 ● Escoger un servicio requerido por otro usuario y poder:
-   ○Hacer comentarios
-   ○Subir un fichero con el trabajo requerido realizado
+   POST ○Hacer comentarios
+   PUT ○Subir un fichero con el trabajo requerido realizado
 ● Marcar un servicio requerido como ya resuelto
 ● Opcional
    ○Gestión del perfil de usuario (Nombre, Email, Biografía, Foto, ...)
@@ -50,7 +50,6 @@ Tabla de comentarios:
    idUser
    idServicio
    texto
-   fichero (opcional)
    fechaCreación
 
 # Endpoint Users
@@ -69,9 +68,10 @@ Tabla de comentarios:
    -   **DELETE [/services/:id]** Borra un servicio sólo si eres quien lo creó
 
 # Endpoints usuarios registrados
-   -   **PUT-[/services/:idService/request]**--- solicitar un servicio especifico 
+   -   **GET-[/services/:idService]**--- escoger un servicio especifico 
    (le tenemos status enum ,por defecto "pending" ----- cafeteria)
-   (puede llevar comentario y fichero)
-   -   **PUT-[/services/:idService/request/resolved]**--finalizar un servicio y marcar como resuelto(el status cambia a resolved)
+   -   **POST-[/services/:idService/comments] Agregar comentario
+   -   **PUT-[/services/:idService/filecompleted] Agregar fichero con solicitud resuelta
+   -   **PUT-[/services/:idService/resolved]**--finalizar un servicio y marcar como resuelto(el status cambia a resolved)
 
 Opcional : con el token que pueda gestionar sus datos del perfil

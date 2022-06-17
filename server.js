@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const token = require('./middlewares/authUser.js');
 
 const { PORT } = process.env;
 
@@ -42,10 +43,32 @@ app.get('/users/:idUser', getUser);
  * ########################
  */
 
-const { listServices } = require('./controllers/theServices');
+const {
+    listServices,
+    createService,
+    newServiceRequest,
+    commentsService,
+    updateFileService,
+    resolvedService,
+} = require('./controllers/theServices');
 
 // Listar todos los services.
 app.get('/services', listServices);
+
+// Crear un servicio
+app.post('/services', token, createService);
+
+// Escoger un servicio
+app.get('/services/:idService', newServiceRequest);
+
+// Agregar un comentario
+app.post('/services/:idService/comments', token, commentsService);
+
+// Subir un fichero completado
+app.put('/services/:idService/filecompleted', token, updateFileService);
+
+// Marcar el servicio finalizado como resuelto
+app.put('/services/:idService/resolved', token, resolvedService);
 
 /**
  * ######################

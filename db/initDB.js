@@ -31,8 +31,8 @@ async function main() {
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 title VARCHAR(150) NOT NULL,
                 description VARCHAR(500) NOT NULL,
-                file VARCHAR(150) NOT NULL,
-                status ENUM("pending", "resolved") DEFAULT "pending",
+                file VARCHAR(50),
+                statusService ENUM("pending", "resolved") DEFAULT "pending",
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -47,7 +47,6 @@ async function main() {
                 idService INTEGER NOT NULL,
                 FOREIGN KEY (idService) REFERENCES services(id),
                 text VARCHAR(500) NOT NULL,
-                file VARCHAR(150) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);

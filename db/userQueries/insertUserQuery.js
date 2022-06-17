@@ -3,7 +3,7 @@ const getConnection = require('../getConnection');
 
 const { generateError } = require('../../helpers');
 
-const insertUserQuery = async (name, email, biography, photo, password) => {
+const insertUserQuery = async (name, email, biography, photoName, password) => {
     let connection;
 
     try {
@@ -30,7 +30,7 @@ const insertUserQuery = async (name, email, biography, photo, password) => {
         // Creamos el usuario.
         const [newUser] = await connection.query(
             `INSERT INTO users (name, email, biography, photo, password) VALUES(?, ?, ?, ?, ?)`,
-            [name, email, biography, photo, hashedPassword]
+            [name, email, biography, photoName, hashedPassword]
         );
 
         // Retornamos el id del elemento creado.
