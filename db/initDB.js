@@ -36,17 +36,18 @@ async function main() {
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
+                )
+                `);
 
         await connection.query(`
-            CREATE TABLE comments (
+                CREATE TABLE servicesAttended (
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 idService INTEGER NOT NULL,
                 FOREIGN KEY (idService) REFERENCES services(id),
                 text VARCHAR(500) NOT NULL,
+                fileCompleted VARCHAR(50),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);

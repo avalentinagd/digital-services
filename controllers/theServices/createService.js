@@ -26,7 +26,7 @@ const createService = async (req, res, next) => {
             // Creamos el directorio si no existe.
             await createPathIfNotExists(uploadsDir);
             //Creamos el nombre nuevo del fichero
-            fileName = `${uuid()}.${path.extname(req.files.file.name)}`;
+            fileName = `${uuid()}${path.extname(req.files.file.name)}`;
 
             const filePath = path.join(uploadsDir, fileName);
             await file.mv(filePath);

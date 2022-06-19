@@ -47,8 +47,7 @@ const {
     listServices,
     createService,
     newServiceRequest,
-    commentsService,
-    updateFileService,
+    uploadFileCompleted,
     resolvedService,
 } = require('./controllers/theServices');
 
@@ -61,11 +60,8 @@ app.post('/services', token, createService);
 // Escoger un servicio
 app.get('/services/:idService', newServiceRequest);
 
-// Agregar un comentario
-app.post('/services/:idService/comments', token, commentsService);
-
-// Subir un fichero completado
-app.put('/services/:idService/filecompleted', token, updateFileService);
+// Subir un fichero completado y añadir un comentario
+app.post('/services/:idService/filecompleted', token, uploadFileCompleted);
 
 // Marcar el servicio finalizado como resuelto
 app.put('/services/:idService/resolved', token, resolvedService);
