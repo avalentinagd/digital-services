@@ -2,9 +2,7 @@ const allServicesQuery = require('../../db/serviceQueries/allServicesQuery');
 
 const listServices = async (req, res, next) => {
     try {
-        const { keyword } = req.query;
-
-        const services = await allServicesQuery(keyword);
+        const services = await allServicesQuery();
 
         res.send({
             status: 'ok',
