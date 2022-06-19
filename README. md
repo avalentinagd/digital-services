@@ -18,60 +18,48 @@ USUARIOS REGISTRADOS:
    ○Explicación
    ○Fichero
 ● Escoger un servicio requerido por otro usuario y poder:
-   POST ○Hacer comentarios
-   PUT ○Subir un fichero con el trabajo requerido realizado
+   ○Hacer comentarios
+   ○Subir un fichero con el trabajo requerido realizado
 ● Marcar un servicio requerido como ya resuelto
 ● Opcional
    ○Gestión del perfil de usuario (Nombre, Email, Biografía, Foto, ...)
 
 # Tablas
 
-Tabla de users:
+Tabla users:
    id
-   nombre
+   name
    email
-   biografia
-   foto
+   biography
+   photo
    password
-   fechaCreacion
-   fechaModificacion (solo si se va a llevar a cabo la parte opcional de gestionar perfil de usuario)
+   createdAt
 
-Tabla de servicios:
+Tabla services:
    id
-   titulo
-   descripcion
-   fichero
-   resolved (true-false) --> o también podéis llamarle status y que sea de tipo Enum con las opciones "pending" o "resolved".
-   idUsers
-   fechaCreación
+   title
+   description
+   file
+   statusService tipo Enum con las opciones "pending" o "resolved".
+   idUser
+   createdAt
 
-Tabla de comentarios:
+Tabla de servicesAttended:
    id
    idUser
-   idServicio
-   texto
-   fechaCreación
+   idService
+   text(del comentario)
+   createdAt
 
 # Endpoint Users
-   -   **POST[/users]** - registro de usuarios (con token--en cafeteria app)
+   -   **POST[/users]** - Registro de usuarios (con token--en cafeteria app)
    -   **POST [/login]** Login de usuario (devuelve token)
-   -   **GET [/users/:id]** Devuelve información de usuario (:marca_de_verificación_blanca:) (de mini-tweeter y berto)
-   
-   -   **DELETE[/users/:id]**Borra un usuario
-   -   **PUT[/users/:id]**Modifica un usuario
+   -   **GET [/users/:id]** Devuelve la información de usuario
 
 # Endpoints services
    -   **GET [/services]** Lista todos los servicios
    -   **POST [/services]** Permite crear un servicio
-   (necesita llevar titulo, explicacion y fichero)
-   
-   -   **DELETE [/services/:id]** Borra un servicio sólo si eres quien lo creó
-
-# Endpoints usuarios registrados
-   -   **GET-[/services/:idService]**--- escoger un servicio especifico 
-   (le tenemos status enum ,por defecto "pending" ----- cafeteria)
-   -   **POST-[/services/:idService/comments] Agregar comentario
-   -   **PUT-[/services/:idService/filecompleted] Agregar fichero con solicitud resuelta
-   -   **PUT-[/services/:idService/resolved]**--finalizar un servicio y marcar como resuelto(el status cambia a resolved)
-
-Opcional : con el token que pueda gestionar sus datos del perfil
+         (necesita llevar titulo, explicacion y fichero)
+   -   **GET-[/services/:idService]** Permite escoger un servicio especifico 
+   -   **POST-[/services/:idService/filecompleted]** Subir un fichero completado y añadir un comentario
+   -   **PUT-[/services/:idService/resolved]** finalizar un servicio y marcar como resuelto(resolved)
