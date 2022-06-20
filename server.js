@@ -28,6 +28,7 @@ app.use(fileUpload());
  */
 
 const { registerUser, loginUser, getUser } = require('./controllers/users');
+
 //Registro de usuario.
 app.post('/users', registerUser);
 
