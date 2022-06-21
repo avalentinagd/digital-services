@@ -2,10 +2,10 @@ const userByIdQuery = require('../../db/userQueries/userByIdQuery');
 
 const getUser = async (req, res, next) => {
     try {
-        // Obtenemos el id del usuario del cual queremos la información.
+        // Se obtiene el id del usuario del cual se quiere tener la información.
         const { idUser } = req.params;
 
-        // Obtenemos la información del usuario.
+        // Se obtiene la información del usuario.
         const user = await userByIdQuery(idUser);
 
         res.send({

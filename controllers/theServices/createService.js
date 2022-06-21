@@ -8,32 +8,35 @@ const createService = async (req, res, next) => {
         const { title, description } = req.body;
         const file = req.files.file;
 
-        // Variable donde almacenaremos el nombre con el que guardaremos el fichero.
+        // Variable donde se almacena el nombre con el que se guardará el fichero.
         let fileName;
-        // si no existe title y description y fichero lanzamos un error.
+
+        // Si no existe title, description y file, se lanza un error.
         if (!title && !description && !file) {
-            throw generateError('Faltan informacion por ingresar', 400);
+            throw generateError('Falta información por ingresar', 400);
         }
+
         if (!req.files || Object.keys(req.files).length === 0) {
             return res.status(400).send('No se han subido archivos.');
         }
 
-        // Si existe el fichero le guardamos.
+        // Si existe el fichero se guarda.
         if (req.files && req.files.file) {
-            // Creamos una ruta absoluta al directorio de descargas.
+            // Se crea una ruta absoluta al directorio de descargas.
             let uploadsDir = path.join(__dirname + '../../../uploads');
 
-            // Creamos el directorio si no existe.
+            // Se crea el directorio si no existe.
             await createPathIfNotExists(uploadsDir);
-            //Creamos el nombre nuevo del fichero
+
+            // Se crea el nombre nuevo del fichero.
             fileName = `${uuid()}${path.extname(req.files.file.name)}`;
 
+            // Se guarda el fichero que recibimos de req.files en una constante.
             const filePath = path.join(uploadsDir, fileName);
             await file.mv(filePath);
-            //Guardamos el fichero que recibimos de req.file en la constante
         }
-        // Registramos  el servicio requerido.
 
+        // Se registra el servicio requerido.
         insertServiceQuery(req.idUser, title, description, fileName);
         res.send({
             status: 'ok',

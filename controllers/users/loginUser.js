@@ -11,23 +11,22 @@ const loginUser = async (req, res, next) => {
             throw generateError('Aun faltan campos por rellenar', 400);
         }
 
-        // Obtenemos al usuario con el email del body.
+        // Se obtiene al usuario con el email del body.
         const user = await userByEmailQuery(email);
 
-        // Comprobamos si las contraseñas coinciden.
+        // Se comprueba si las contraseñas coinciden.
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
             throw generateError('Contraseña incorrecta', 401);
         }
 
-        // Información que queremos guardar en el token.
-        //lo que quiero guardar en el token
+        // Información que se va a guardar en el token.
         const payload = {
             id: user.id,
         };
 
-        // Firmamos el token. Crear el token
+        // Se crea el token.
         const token = jwt.sign(payload, process.env.SECRET, {
             expiresIn: '15d',
         });

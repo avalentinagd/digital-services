@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
-const token = require('./middlewares/authUser.js');
 
 const { PORT } = process.env;
 
@@ -21,22 +20,32 @@ app.use(fileUpload());
  * #################
  */
 
+const authUser = require('./middlewares/authUser.js');
+
 /**
  * ########################
  * ## Endpoints Usuarios ##
  * ########################
  */
 
-const { registerUser, loginUser, getUser } = require('./controllers/users');
+const {
+    registerUser,
+    loginUser,
+    getUser,
+    manageProfile,
+} = require('./controllers/users');
 
-//Registro de usuario.
+// Registrar un usuario.
 app.post('/users', registerUser);
 
-// Login de usuario.
+// Iniciar sesión de un usuario.
 app.post('/login', loginUser);
 
-// Información sobre un usuario.
+// Obtener información sobre un usuario registrado.
 app.get('/users/:idUser', getUser);
+
+// Gestionar el perfil de un usuario.
+app.put('/users/:idUser', authUser, manageProfile);
 
 /**
  * ########################
@@ -52,20 +61,20 @@ const {
     resolvedService,
 } = require('./controllers/theServices');
 
-// Listar todos los services.
+// Obtener una lista de todos los servicios.
 app.get('/services', listServices);
 
-// Crear un servicio
-app.post('/services', token, createService);
+// Crear un nuevo servicio.
+app.post('/services', authUser, createService);
 
-// Escoger un servicio
+// Seleccionar un servicio.
 app.get('/services/:idService', newServiceRequest);
 
-// Subir un fichero completado y añadir un comentario
-app.post('/services/:idService/filecompleted', token, uploadFileCompleted);
+// Subir un fichero completado y añadir un comentario.
+app.post('/services/:idService/filecompleted', authUser, uploadFileCompleted);
 
-// Marcar el servicio finalizado como resuelto
-app.put('/services/:idService/resolved', token, resolvedService);
+// Marcar el servicio finalizado como resuelto.
+app.put('/services/:idService/resolved', authUser, resolvedService);
 
 /**
  * ######################

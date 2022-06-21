@@ -11,9 +11,9 @@ const resolvedServiceQuery = async (idService) => {
             [idService]
         );
 
-        // Si el atributo "statusService" esta como pendiente lanzamos un error.
+        // Si el atributo "statusService" esta como pendiente se lanza un error.
         if (!services[0].statusService) {
-            const err = new Error('El servicio aun no ha sido resuelto');
+            const err = new Error('El servicio aun no se ha resuelto');
             err.statusCode = 403;
             throw err;
         }

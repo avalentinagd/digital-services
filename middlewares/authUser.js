@@ -4,28 +4,28 @@ const { generateError } = require('../helpers');
 
 const authUser = (req, res, next) => {
     try {
-        // Obtenemos el token.
+        // Se obtiene el token.
         const { authorization } = req.headers;
 
-        // Si no hay token lanzamos un error.
+        // Si no hay token se lanza un error.
         if (!authorization) {
             throw generateError('Falta la cabecera de autorización', 401);
         }
 
-        // Variable que contendrá la información del token (la parte del paylaod).
+        // Variable que contendrá la información del token (paylaod).
         let token;
 
         try {
-            // Intentamos obtener la info del token.
+            // Se obtiene la info del token.
             token = jwt.verify(authorization, process.env.SECRET);
         } catch {
             throw generateError('Token incorrecto', 401);
         }
 
-        // Agregamos una nueva propiedad a la request.
+        // Se agrega una nueva propiedad a la request.
         req.idUser = token.id;
 
-        // Saltamos al siguiente controlador.
+        // Saltar al siguiente controlador.
         next();
     } catch (err) {
         next(err);

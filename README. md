@@ -41,26 +41,27 @@ Tabla services:
    title
    description
    file
-   statusService tipo Enum con las opciones "pending" o "resolved".
+   statusService
    idUser
    createdAt
 
-Tabla de servicesAttended:
+Tabla servicesAttended:
    id
    idUser
    idService
    text(del comentario)
+   fileCompleted
    createdAt
 
-# Endpoint Users
-   -   **POST[/users]** - Registro de usuarios (con token--en cafeteria app)
-   -   **POST [/login]** Login de usuario (devuelve token)
-   -   **GET [/users/:id]** Devuelve la información de usuario
+Endpoints Users
+   -   POST[/users] - Registrar un usuario.
+   -   POST [/login] - Iniciar sesión de un usuario.
+   -   GET [/users/:idUser] - Obtener información sobre un usuario registrado.
+   -   PUT [/users/:idUser] - Gestionar el perfil de un usuario.
 
-# Endpoints services
-   -   **GET [/services]** Lista todos los servicios
-   -   **POST [/services]** Permite crear un servicio
-         (necesita llevar titulo, explicacion y fichero)
-   -   **GET-[/services/:idService]** Permite escoger un servicio especifico 
-   -   **POST-[/services/:idService/filecompleted]** Subir un fichero completado y añadir un comentario
-   -   **PUT-[/services/:idService/resolved]** finalizar un servicio y marcar como resuelto(resolved)
+Endpoints services
+   -   GET [/services] - Obtener una lista de todos los servicios.
+   -   POST [/services] - Crear un nuevo servicio.
+   -   GET - [/services/:idService] - Seleccionar un servicio.
+   -   POST - [/services/:idService/filecompleted] - Subir un fichero completado y añadir un comentario.
+   -   PUT - [/services/:idService/resolved] - Marcar el servicio finalizado como resuelto.

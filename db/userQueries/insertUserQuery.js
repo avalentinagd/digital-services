@@ -9,14 +9,14 @@ const insertUserQuery = async (name, email, biography, photoName, password) => {
     try {
         connection = await getConnection();
 
-        // Obtenemos un array de usuarios que cumplan la condición establecida.
+        // Se obtiene un array de usuarios que cumplan la condición establecida.
         const [users] = await connection.query(
             `SELECT id FROM users WHERE email = ?`,
             [email]
         );
 
         // Si el array de usuarios tiene algún usuario quiere decir que el email
-        // ya está vinculado a otro usuario. Lanzamos un error.
+        // ya está vinculado a otro usuario, en ese caso se lanza un error.
         if (users.length > 0) {
             throw generateError(
                 'Ya existe un usuario con ese email en la base de datos',
@@ -24,16 +24,16 @@ const insertUserQuery = async (name, email, biography, photoName, password) => {
             );
         }
 
-        // Encriptamos la contraseña.
+        // Se encripta la contraseña.
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Creamos el usuario.
+        // Se crea el usuario.
         const [newUser] = await connection.query(
             `INSERT INTO users (name, email, biography, photo, password) VALUES(?, ?, ?, ?, ?)`,
             [name, email, biography, photoName, hashedPassword]
         );
 
-        // Retornamos el id del elemento creado.
+        // Se retorna el id del elemento creado.
         return newUser.insertId;
     } finally {
         if (connection) connection.release();

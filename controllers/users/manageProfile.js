@@ -1,21 +1,31 @@
 const path = require('path');
 const sharp = require('sharp');
 const { v4: uuid } = require('uuid');
-const insertUserQuery = require('../../db/userQueries/insertUserQuery');
-
+const manageProfileQuery = require('../../db/userQueries/manageProfileQuery');
+const userByIdQuery = require('../../db/userQueries/userByIdQuery');
 const { generateError, createPathIfNotExists } = require('../../helpers');
 
-const newUser = async (req, res, next) => {
+const manageProfile = async (req, res, next) => {
     try {
-        // Se obtienen los campos del body.
+        // Se obtienen los datos que se reciben del body.
         const { name, email, biography, password } = req.body;
-        const { photo } = req.files;
-        console.log(photo);
+        let photo = req.files.photo;
 
-        // Si faltan campos lanzamos un error.
-        if (!name || !email || !biography || !password) {
-            throw generateError('Faltan campos', 400);
-        }
+        // Se obtiene el id recogido de los params.
+        const { idUser } = req.params;
+
+        // Se obtiene al usuario con el email del body.
+        const user = await userByIdQuery(idUser);
+
+        // Se obtiene el id almacenado en el token.
+        const idUserToken = user.id;
+
+        // Se asegura que el usuario este modificando su propio perfil.
+        if (idUser != idUserToken)
+            throw generateError(
+                'Están intentando acceder a información de otro usuario',
+                404
+            );
 
         let photoName;
 
@@ -47,8 +57,9 @@ const newUser = async (req, res, next) => {
             await photo.mv(filePath);
         }
 
-        // Se crea un usuario en la base de datos y obtenemos su id.
-        const idUser = await insertUserQuery(
+        // Query con los parametros del body.
+        await manageProfileQuery(
+            idUser,
             name,
             email,
             biography,
@@ -56,13 +67,13 @@ const newUser = async (req, res, next) => {
             password
         );
 
+        // Si todo va bien, se envía un mensaje que lo indique.
         res.send({
             status: 'ok',
-            message: `El usuario se ha creado con el id ${idUser}`,
+            message: `${name}, tu modificación ha sido exitosa`,
         });
     } catch (error) {
         next(error);
     }
 };
-
-module.exports = newUser;
+module.exports = manageProfile;

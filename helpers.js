@@ -8,11 +8,11 @@ const generateError = (message, status) => {
 
 const createPathIfNotExists = async (path) => {
     try {
-        // Accedemos al directorio.
+        // Acceder al directorio.
         await fs.access(path);
     } catch {
-        // Si no es posible acceder al directorio en el "try" se
-        // lanzaría un error. Si es así creamos el directorio.
+        // Si no es posible acceder al directorio se
+        // lanza un error y se crea el directorio.
         await fs.mkdir(path);
     }
 };

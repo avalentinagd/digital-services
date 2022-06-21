@@ -6,13 +6,9 @@ async function main() {
     try {
         connection = await getConnection();
 
-        console.log('Borrando tablas...');
-
         await connection.query('DROP TABLE IF EXISTS comments');
         await connection.query('DROP TABLE IF EXISTS services');
         await connection.query('DROP TABLE IF EXISTS users');
-
-        console.log('Creando tablas...');
 
         await connection.query(`
             CREATE TABLE users (
@@ -36,11 +32,11 @@ async function main() {
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
-                )
-                `);
+            )
+        `);
 
         await connection.query(`
-                CREATE TABLE servicesAttended (
+            CREATE TABLE servicesAttended (
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
@@ -51,8 +47,6 @@ async function main() {
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
-
-        console.log('Tablas creadas');
     } catch (err) {
         console.error(err);
     } finally {
