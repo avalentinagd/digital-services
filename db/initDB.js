@@ -6,10 +6,11 @@ async function main() {
     try {
         connection = await getConnection();
 
-        await connection.query('DROP TABLE IF EXISTS comments');
+        await connection.query('DROP TABLE IF EXISTS servicesAttended');
         await connection.query('DROP TABLE IF EXISTS services');
         await connection.query('DROP TABLE IF EXISTS users');
 
+        console.log('creando tablas');
         await connection.query(`
             CREATE TABLE users (
                 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,9 +19,11 @@ async function main() {
                 biography VARCHAR(300) NOT NULL,
                 photo VARCHAR(100),
                 password VARCHAR(100) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                modifiedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
             )
         `);
+        console.log('hola perola');
 
         await connection.query(`
             CREATE TABLE services (
@@ -47,6 +50,8 @@ async function main() {
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
+
+        console.log('Se han creado las tablas');
     } catch (err) {
         console.error(err);
     } finally {

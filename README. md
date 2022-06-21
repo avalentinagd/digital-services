@@ -35,6 +35,7 @@ Tabla users:
    photo
    password
    createdAt
+   modifiedAt
 
 Tabla services:
    id

@@ -9,30 +9,13 @@
 			"name": "Services",
 			"item": [
 				{
-					"name": "Ver lista de servicios",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{server}}/services",
-							"host": [
-								"{{server}}"
-							],
-							"path": [
-								"services"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Crear un nuevo servicio",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{rayuser}}",
+								"value": "{{tamarauser}}",
 								"type": "default"
 							}
 						],
@@ -41,12 +24,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Transcripción",
+									"value": "Tranducción",
 									"type": "default"
 								},
 								{
 									"key": "description",
-									"value": "Necesito transcribir datos a Google Sheets",
+									"value": "Necesito traducir un texto en inglés",
 									"type": "default"
 								},
 								{
@@ -61,6 +44,23 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{server}}/services",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver lista de servicios",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{server}}/services",
 							"host": [
@@ -97,13 +97,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/services/7",
+							"raw": "{{server}}/services/2",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"services",
-								"7"
+								"2"
 							]
 						}
 					},
@@ -116,7 +116,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{diegouser}}",
+								"value": "{{rayuser}}",
 								"type": "default"
 							}
 						],
@@ -125,7 +125,7 @@
 							"formdata": [
 								{
 									"key": "text",
-									"value": "Ray, tus transcripción ya está lista",
+									"value": "Tu transcripción ya está lista",
 									"type": "default"
 								},
 								{
@@ -141,13 +141,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/services/7/filecompleted",
+							"raw": "{{server}}/services/2/filecompleted",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"services",
-								"7",
+								"2",
 								"filecompleted"
 							]
 						}
@@ -161,18 +161,18 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{diegouser}}",
+								"value": "{{tamarauser}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{server}}/services/7/resolved",
+							"raw": "{{server}}/services/2/resolved",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"services",
-								"7",
+								"2",
 								"resolved"
 							]
 						}
@@ -194,17 +194,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Ray",
+									"value": "Tamara",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "ray@gmail.com",
+									"value": "tamara@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "biography",
-									"value": "Soy Ray",
+									"value": "Soy Tamara",
 									"type": "default"
 								},
 								{
@@ -214,7 +214,7 @@
 								},
 								{
 									"key": "password",
-									"value": "ray.123",
+									"value": "tamara.123",
 									"type": "default"
 								}
 							],
@@ -263,12 +263,12 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "ray@gmail.com",
+									"value": "tamara@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "ray.123",
+									"value": "tamara.123",
 									"type": "default"
 								}
 							],
@@ -296,13 +296,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/users/4",
+							"raw": "{{server}}/users/2",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -324,40 +324,39 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Rayer",
+									"value": "RayRay",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "rayer@hotmail.com",
+									"value": "rayray@hotmail.com",
 									"type": "default"
 								},
 								{
 									"key": "biography",
-									"value": "Hola, soy Rayer",
+									"value": "Hola, soy Rayray",
 									"type": "default"
 								},
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/home/andrea/Imágenes/Imágenes proyecto/FONDO5.jpg",
-									"disabled": true
+									"src": "/home/andrea/Imágenes/Imágenes proyecto/FONDO5.jpg"
 								},
 								{
 									"key": "password",
-									"value": "dieguito.123",
+									"value": "rayray.123",
 									"type": "default"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{server}}/users/2",
+							"raw": "{{server}}/users/4",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -392,19 +391,19 @@
 			"value": "http://localhost:4000"
 		},
 		{
-			"key": "andreauser",
-			"value": "",
-			"type": "default"
-		},
-		{
-			"key": "diegouser",
-			"value": "",
-			"type": "default"
-		},
-		{
 			"key": "rayuser",
 			"value": "",
 			"type": "default"
+		},
+		{
+			"key": "tamarauser",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"value": "",
+			"type": "default",
+			"disabled": true
 		}
 	]
 }
