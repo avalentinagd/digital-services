@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const getConnection = require('../getConnection');
 const { generateError } = require('../../helpers');
 
@@ -23,11 +24,8 @@ const manageProfileQuery = async (
         if (users.length === 0)
             throw generateError('No se ha encontrado el usuario', 404);
 
-        nameUser = nameUser || users[0].name;
-        emailUser = emailUser || users[0].email;
-        biographyUser = biographyUser || users[0].biography;
-        photoUser = photoUser || users[0].photo;
-        passwordUser = passwordUser || users[0].password;
+        // Se encripta la contraseña.
+        const hashedPassword = await bcrypt.hash(passwordUser, 10);
 
         // Se actualizan los datos.
         await connection.query(
@@ -42,11 +40,11 @@ const manageProfileQuery = async (
             id=?
         `,
             [
-                nameUser,
-                emailUser,
-                biographyUser,
-                photoUser,
-                passwordUser,
+                nameUser ? nameUser : users[0].name,
+                emailUser ? emailUser : users[0].email,
+                biographyUser ? biographyUser : users[0].biography,
+                photoUser ? photoUser : users[0].photo,
+                hashedPassword ? hashedPassword : users[0].password,
                 idUser,
             ]
         );

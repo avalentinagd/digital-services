@@ -56,7 +56,7 @@ app.put('/users/:idUser', authUser, manageProfile);
 const {
     listServices,
     createService,
-    newServiceRequest,
+    selectService,
     uploadFileCompleted,
     resolvedService,
 } = require('./controllers/theServices');
@@ -68,7 +68,7 @@ app.get('/services', listServices);
 app.post('/services', authUser, createService);
 
 // Seleccionar un servicio.
-app.get('/services/:idService', newServiceRequest);
+app.get('/services/:idService', selectService);
 
 // Subir un fichero completado y añadir un comentario.
 app.post('/services/:idService/filecompleted', authUser, uploadFileCompleted);

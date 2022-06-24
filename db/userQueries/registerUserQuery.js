@@ -3,7 +3,13 @@ const getConnection = require('../getConnection');
 
 const { generateError } = require('../../helpers');
 
-const insertUserQuery = async (name, email, biography, photoName, password) => {
+const registerUserQuery = async (
+    name,
+    email,
+    biography,
+    photoName,
+    password
+) => {
     let connection;
 
     try {
@@ -40,4 +46,4 @@ const insertUserQuery = async (name, email, biography, photoName, password) => {
     }
 };
 
-module.exports = insertUserQuery;
+module.exports = registerUserQuery;

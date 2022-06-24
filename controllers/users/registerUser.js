@@ -1,16 +1,15 @@
 const path = require('path');
 const sharp = require('sharp');
 const { v4: uuid } = require('uuid');
-const insertUserQuery = require('../../db/userQueries/insertUserQuery');
+const registerUserQuery = require('../../db/userQueries/registerUserQuery');
 
 const { generateError, createPathIfNotExists } = require('../../helpers');
 
-const newUser = async (req, res, next) => {
+const registerUser = async (req, res, next) => {
     try {
         // Se obtienen los campos del body.
         const { name, email, biography, password } = req.body;
         const { photo } = req.files;
-        console.log(photo);
 
         // Si faltan campos lanzamos un error.
         if (!name || !email || !biography || !password) {
@@ -35,7 +34,7 @@ const newUser = async (req, res, next) => {
             sharpphoto.resize(250);
 
             // Se genera un nombre único para la imagen.
-            photoName = `${uuid()}.${path.extname(req.files.photo.name)}`;
+            photoName = `${uuid()}${path.extname(req.files.photo.name)}`;
 
             // Se genera la ruta absoluta a la imagen.
             const imgPath = path.join(uploadsDir, photoName);
@@ -48,7 +47,7 @@ const newUser = async (req, res, next) => {
         }
 
         // Se crea un usuario en la base de datos y obtenemos su id.
-        const idUser = await insertUserQuery(
+        const idUser = await registerUserQuery(
             name,
             email,
             biography,
@@ -65,4 +64,4 @@ const newUser = async (req, res, next) => {
     }
 };
 
-module.exports = newUser;
+module.exports = registerUser;

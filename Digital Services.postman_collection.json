@@ -15,7 +15,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{tamarauser}}",
+								"value": "{{anauser}}",
 								"type": "default"
 							}
 						],
@@ -24,12 +24,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Tranducción",
+									"value": "Traducción",
 									"type": "default"
 								},
 								{
 									"key": "description",
-									"value": "Necesito traducir un texto en inglés",
+									"value": "Necesito traducir este texto al italiano",
 									"type": "default"
 								},
 								{
@@ -116,7 +116,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{rayuser}}",
+								"value": "{{carlosuser}}",
 								"type": "default"
 							}
 						],
@@ -125,7 +125,7 @@
 							"formdata": [
 								{
 									"key": "text",
-									"value": "Tu transcripción ya está lista",
+									"value": "Tu readucción ya está lista",
 									"type": "default"
 								},
 								{
@@ -161,18 +161,18 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{tamarauser}}",
+								"value": "{{carlosuser}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{server}}/services/2/resolved",
+							"raw": "{{server}}/services/1/resolved",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"services",
-								"2",
+								"1",
 								"resolved"
 							]
 						}
@@ -194,17 +194,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Tamara",
+									"value": "Ana",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "tamara@gmail.com",
+									"value": "ana@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "biography",
-									"value": "Soy Tamara",
+									"value": "Soy Ana",
 									"type": "default"
 								},
 								{
@@ -214,7 +214,7 @@
 								},
 								{
 									"key": "password",
-									"value": "tamara.123",
+									"value": "ana.123",
 									"type": "default"
 								}
 							],
@@ -263,12 +263,12 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "tamara@gmail.com",
+									"value": "carlos@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "tamara.123",
+									"value": "carlos.123",
 									"type": "default"
 								}
 							],
@@ -296,13 +296,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/users/2",
+							"raw": "{{server}}/users/1",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -315,7 +315,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{diegouser}}",
+								"value": "{{rayuser}}",
 								"type": "default"
 							}
 						],
@@ -324,39 +324,43 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "RayRay",
-									"type": "default"
+									"value": "Ramoncito",
+									"type": "default",
+									"disabled": true
 								},
 								{
 									"key": "email",
-									"value": "rayray@hotmail.com",
-									"type": "default"
+									"value": "ramoncito@hotmail.com",
+									"type": "default",
+									"disabled": true
 								},
 								{
 									"key": "biography",
-									"value": "Hola, soy Rayray",
-									"type": "default"
+									"value": "Hola, soy Ramoncito",
+									"type": "default",
+									"disabled": true
 								},
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/home/andrea/Imágenes/Imágenes proyecto/FONDO5.jpg"
+									"src": "/home/andrea/Imágenes/Imágenes proyecto/FONDO2.jpg"
 								},
 								{
 									"key": "password",
-									"value": "rayray.123",
-									"type": "default"
+									"value": "ramoncito123",
+									"type": "default",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{server}}/users/4",
+							"raw": "{{server}}/users/3",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -391,19 +395,14 @@
 			"value": "http://localhost:4000"
 		},
 		{
-			"key": "rayuser",
+			"key": "carlosuser",
 			"value": "",
 			"type": "default"
 		},
 		{
-			"key": "tamarauser",
+			"key": "anauser",
 			"value": "",
 			"type": "default"
-		},
-		{
-			"value": "",
-			"type": "default",
-			"disabled": true
 		}
 	]
 }

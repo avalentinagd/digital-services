@@ -1,3 +1,4 @@
+const fs = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
 const { v4: uuid } = require('uuid');
@@ -9,7 +10,6 @@ const manageProfile = async (req, res, next) => {
     try {
         // Se obtienen los datos que se reciben del body.
         const { name, email, biography, password } = req.body;
-        let photo = req.files.photo;
 
         // Se obtiene el id recogido de los params.
         const { idUser } = req.params;
@@ -26,11 +26,19 @@ const manageProfile = async (req, res, next) => {
                 'Están intentando acceder a información de otro usuario',
                 404
             );
+        // Se guarda la foto anterior en la variable "oldPhoto".
+        let oldPhoto = user.photo;
 
         let photoName;
 
-        // Si la imagen existe, se guarda.
+        // Si no existe una nueva foto para actualizar en el perfil, debe quedar la misma foto.
+        if (!req.files) {
+            photoName = oldPhoto;
+        }
+
+        // Si la nueva imagen existe, se guarda.
         if (req.files && req.files.photo) {
+            let photo = req.files.photo;
             // Se crea una ruta absoluta al directorio de descargas.
             const uploadsDir = path.join(__dirname + '../../../uploadsPhoto');
 
@@ -45,7 +53,7 @@ const manageProfile = async (req, res, next) => {
             sharpphoto.resize(250);
 
             // Se genera un nombre único para la imagen.
-            photoName = `${uuid()}.${path.extname(req.files.photo.name)}`;
+            photoName = `${uuid()}${path.extname(req.files.photo.name)}`;
 
             // Se genera la ruta absoluta a la imagen.
             const imgPath = path.join(uploadsDir, photoName);
@@ -55,6 +63,15 @@ const manageProfile = async (req, res, next) => {
 
             const filePath = path.join(uploadsDir, photoName);
             await photo.mv(filePath);
+
+            try {
+                // Eliminar photo antigua.
+                fs.unlink(uploadsDir + '/' + oldPhoto);
+
+                console.log('Archivo eliminado');
+            } catch (err) {
+                console.error(err.message);
+            }
         }
 
         // Query con los parametros del body.
@@ -70,7 +87,7 @@ const manageProfile = async (req, res, next) => {
         // Si todo va bien, se envía un mensaje que lo indique.
         res.send({
             status: 'ok',
-            message: `${name}, tu modificación ha sido exitosa`,
+            message: `Tu modificación ha sido exitosa`,
         });
     } catch (error) {
         next(error);

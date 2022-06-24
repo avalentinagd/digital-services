@@ -1,14 +1,20 @@
 const getConnection = require('../getConnection');
 const { generateError } = require('../../helpers');
 
-const serviceSelectionQuery = async (idService) => {
+const selectServiceQuery = async (idService) => {
     let connection;
 
     try {
         connection = await getConnection();
 
         const [services] = await connection.query(
-            `SELECT title FROM services WHERE id = ?`,
+            `
+                SELECT S.id, S.title, S.description, S.file, S.statusService, S.idUser, S.createdAt
+                FROM services S
+                LEFT JOIN users U 
+                ON S.idUser = U.id 
+                WHERE S.id = ?
+            `,
             [idService]
         );
 
@@ -18,9 +24,10 @@ const serviceSelectionQuery = async (idService) => {
                 409
             );
         }
+        return services;
     } finally {
         if (connection) connection.release();
     }
 };
 
-module.exports = serviceSelectionQuery;
+module.exports = selectServiceQuery;

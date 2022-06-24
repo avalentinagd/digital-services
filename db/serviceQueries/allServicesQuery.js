@@ -13,7 +13,7 @@ const allServicesQuery = async () => {
                 LEFT JOIN users U 
                 ON S.idUser = U.id
                 ORDER BY S.createdAt DESC
-                `
+            `
         );
 
         return services;

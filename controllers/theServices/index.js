@@ -1,13 +1,13 @@
 const listServices = require('./listServices');
 const createService = require('./createService');
-const newServiceRequest = require('./newServiceRequest');
+const selectService = require('./selectService');
 const uploadFileCompleted = require('./uploadFileCompleted');
 const resolvedService = require('./resolvedService');
 
 module.exports = {
     listServices,
     createService,
-    newServiceRequest,
+    selectService,
     uploadFileCompleted,
     resolvedService,
 };
