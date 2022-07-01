@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const { PORT } = process.env;
 
@@ -13,6 +14,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use(fileUpload());
+
+app.use(cors());
+
+app.use(express.static('uploads'));
 
 /**
  * #################
