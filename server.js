@@ -38,6 +38,7 @@ const {
     loginUser,
     getUser,
     manageProfile,
+    getOwnUser,
 } = require('./controllers/users');
 
 // Registrar un usuario.
@@ -51,6 +52,9 @@ app.get('/users/:idUser', getUser);
 
 // Gestionar el perfil de un usuario.
 app.put('/users/:idUser', authUser, manageProfile);
+
+// Obtener nformación sobre el usuario del token.
+app.get('/users', authUser, getOwnUser);
 
 /**
  * ########################
