@@ -296,13 +296,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/users/1",
+							"raw": "{{server}}/users/2",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -361,6 +361,29 @@
 							"path": [
 								"users",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario propio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{carlosuser}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/users",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users"
 							]
 						}
 					},

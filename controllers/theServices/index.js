@@ -3,6 +3,7 @@ const createService = require('./createService');
 const selectService = require('./selectService');
 const uploadFileCompleted = require('./uploadFileCompleted');
 const resolvedService = require('./resolvedService');
+const allComments = require('./allComments');
 
 module.exports = {
     listServices,
@@ -10,4 +11,5 @@ module.exports = {
     selectService,
     uploadFileCompleted,
     resolvedService,
+    allComments,
 };
