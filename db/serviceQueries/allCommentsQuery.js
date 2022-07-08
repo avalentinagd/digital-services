@@ -1,6 +1,6 @@
 const getConnection = require('../getConnection');
 
-const allCommentsQuery = async () => {
+const allCommentsQuery = async (idService) => {
     let connection;
 
     try {
@@ -8,12 +8,10 @@ const allCommentsQuery = async () => {
 
         const [comments] = await connection.query(
             `
-                SELECT SA.idUser, SA.text, SA.fileCompleted, SA.createdAt
-                FROM servicesAttended SA
-                LEFT JOIN services S 
-                ON SA.idService = S.id
-                ORDER BY S.createdAt DESC
-            `
+                SELECT idUser, idService, text, fileCompleted, createdAt FROM servicesAttended WHERE idService = ? 
+                ORDER BY createdAt DESC
+            `,
+            [idService]
         );
 
         return comments;

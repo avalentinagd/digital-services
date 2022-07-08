@@ -2,7 +2,9 @@ const allCommentsQuery = require('../../db/serviceQueries/allCommentsQuery');
 
 const allComments = async (req, res, next) => {
     try {
-        const comments = await allCommentsQuery();
+        const { idService } = req.params;
+
+        const comments = await allCommentsQuery(idService);
 
         res.send({
             status: 'ok',

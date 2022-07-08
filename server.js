@@ -88,7 +88,7 @@ app.post('/services/:idService/filecompleted', authUser, uploadFileCompleted);
 // Marcar el servicio finalizado como resuelto.
 app.put('/services/:idService/resolved', authUser, resolvedService);
 
-// Obtener comentarios
+// Obtener comentarios de un servicio.
 app.get('/services/:idService/comments', authUser, allComments);
 
 /**
