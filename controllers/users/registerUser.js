@@ -13,7 +13,7 @@ const registerUser = async (req, res, next) => {
 
         // Si faltan campos lanzamos un error.
         if (!name || !email || !biography || !password) {
-            throw generateError('Faltan campos', 400);
+            throw generateError('Missing fields', 400);
         }
 
         let photoName;
@@ -57,7 +57,7 @@ const registerUser = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            message: `El usuario se ha creado con el id ${idUser}`,
+            message: `User created with the id ${idUser}`,
         });
     } catch (error) {
         next(error);

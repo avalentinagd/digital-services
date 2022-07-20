@@ -9,7 +9,7 @@ const authUser = (req, res, next) => {
 
         // Si no hay token se lanza un error.
         if (!authorization) {
-            throw generateError('Falta la cabecera de autorización', 401);
+            throw generateError('The authorization header is missing', 401);
         }
 
         // Variable que contendrá la información del token (paylaod).
@@ -19,7 +19,7 @@ const authUser = (req, res, next) => {
             // Se obtiene la info del token.
             token = jwt.verify(authorization, process.env.SECRET);
         } catch {
-            throw generateError('Token incorrecto', 401);
+            throw generateError('Invalid token', 401);
         }
 
         // Se agrega una nueva propiedad a la request.

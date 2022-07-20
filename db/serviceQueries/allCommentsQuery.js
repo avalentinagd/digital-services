@@ -8,7 +8,7 @@ const allCommentsQuery = async (idService) => {
 
         const [comments] = await connection.query(
             `
-                SELECT idUser, idService, text, fileCompleted, createdAt FROM servicesAttended WHERE idService = ? 
+                SELECT id, idUser, idService, text, fileCompleted, createdAt FROM servicesAttended WHERE idService = ? 
                 ORDER BY createdAt DESC
             `,
             [idService]

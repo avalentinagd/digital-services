@@ -15,7 +15,7 @@ const userByIdQuery = async (idUser) => {
 
         // Si no hay usuarios con ese id lanzamos un error.
         if (users.length < 1) {
-            throw generateError('Usuario no encontrado', 404);
+            throw generateError('User not found', 404);
         }
 
         // Hacemos destructuring de las propiedades del usuario.

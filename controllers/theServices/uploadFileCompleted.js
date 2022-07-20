@@ -12,7 +12,7 @@ const uploadFileCompleted = async (req, res, next) => {
         // Si el texto no existe o supera los 500 caracteres se lanza un error.
         if (!text || text.length > 500) {
             throw generateError(
-                'Falta el texto o la longitud supera los 500 caracteres',
+                'Text missing or length exceeds 500 characters.',
                 400
             );
         }
@@ -21,7 +21,7 @@ const uploadFileCompleted = async (req, res, next) => {
         let fileCompletedName;
 
         if (!req.files || Object.keys(req.files).length === 0) {
-            throw generateError('No se han subido archivos.', 400);
+            throw generateError('No files have been uploaded.', 400);
         }
 
         // Si existe el fichero se guardará.
@@ -44,7 +44,7 @@ const uploadFileCompleted = async (req, res, next) => {
         }
 
         // Se registra el fichero finalizado.
-        uploadFileCompletedQuery(
+        const idComment = await uploadFileCompletedQuery(
             req.idUser,
             idService,
             text,
@@ -52,7 +52,16 @@ const uploadFileCompleted = async (req, res, next) => {
         );
         res.send({
             status: 'ok',
-            message: 'El fichero completado se ha subido',
+            data: {
+                comment: {
+                    id: idComment,
+                    idUser: req.idUser,
+                    idService,
+                    text,
+                    fileCompleted: fileCompletedName,
+                    createdAt: new Date(),
+                },
+            },
         });
     } catch (err) {
         next(err);

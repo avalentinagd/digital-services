@@ -21,8 +21,7 @@ const manageProfileQuery = async (
         );
 
         // Si no hay usuario se devuelve un error.
-        if (users.length === 0)
-            throw generateError('No se ha encontrado el usuario', 404);
+        if (users.length === 0) throw generateError('User not found', 404);
 
         // Se encripta la contraseña.
         const hashedPassword = await bcrypt.hash(passwordUser, 10);

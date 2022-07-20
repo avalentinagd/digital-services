@@ -14,7 +14,7 @@ const userByEmailQuery = async (email) => {
         );
 
         if (users.length < 1) {
-            throw generateError('Usuario no encontrado', 404);
+            throw generateError('User not found', 404);
         }
 
         return users[0];

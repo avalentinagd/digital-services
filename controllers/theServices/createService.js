@@ -13,11 +13,11 @@ const createService = async (req, res, next) => {
 
         // Si no existe title, description y file, se lanza un error.
         if (!title && !description && !file) {
-            throw generateError('Falta información por ingresar', 400);
+            throw generateError('Missing information to enter', 400);
         }
 
         if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No se han subido archivos.');
+            return res.status(400).send('No files have been uploaded.');
         }
 
         // Si existe el fichero se guarda.
@@ -40,7 +40,7 @@ const createService = async (req, res, next) => {
         insertServiceQuery(req.idUser, title, description, fileName);
         res.send({
             status: 'ok',
-            message: 'Servicio creado',
+            message: 'Service created',
         });
     } catch (err) {
         next(err);

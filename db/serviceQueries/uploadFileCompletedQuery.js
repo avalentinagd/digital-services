@@ -11,13 +11,15 @@ const uploadFileCompletedQuery = async (
     try {
         connection = await getConnection();
 
-        await connection.query(
+        const [newComment] = await connection.query(
             `
             INSERT INTO servicesAttended (idUser, idService, text, fileCompleted)
             VALUES (?, ?, ?, ?)
             `,
             [idUser, idService, text, fileCompletedName]
         );
+
+        return newComment.insertId;
     } finally {
         if (connection) connection.release();
     }

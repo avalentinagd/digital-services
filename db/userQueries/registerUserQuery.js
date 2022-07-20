@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const getConnection = require('../getConnection');
-
 const { generateError } = require('../../helpers');
 
 const registerUserQuery = async (
@@ -25,7 +24,7 @@ const registerUserQuery = async (
         // ya está vinculado a otro usuario, en ese caso se lanza un error.
         if (users.length > 0) {
             throw generateError(
-                'Ya existe un usuario con ese email en la base de datos',
+                'There is a user with this email address.',
                 409
             );
         }
